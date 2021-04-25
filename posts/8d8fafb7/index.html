@@ -16,7 +16,7 @@
 <meta property="og:description" content="介绍python的数据类型，包括number（数字）、string（字符串}、list（列表）、tuple（元组）、sets（集合）、dic（字典）。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-04-23T01:41:19.000Z">
-<meta property="article:modified_time" content="2021-04-23T01:48:52.768Z">
+<meta property="article:modified_time" content="2021-04-23T02:34:20.000Z">
 <meta property="article:author" content="yeemj">
 <meta property="article:tag" content="python基础">
 <meta name="twitter:card" content="summary">
@@ -69,7 +69,7 @@
 			</ul>
 		</nav>
 		<nav>
-			总文章数 27
+			总文章数 32
 		</nav>
 		<nav class="header-smart-menu">
     		
@@ -198,19 +198,19 @@
 <h4 id="字符串String"><a href="#字符串String" class="headerlink" title="字符串String"></a>字符串String</h4><p>由数字、字母、下划线组成的一串字符。</p>
 <p>创建字符串可以使用单引号、双引号、三单引号和三双引号，这三种形式实际上没有区别，只是在形式上有不同。当然，三单引号可以实现换行操作。</p>
 <p>python不支持单字符类型，单字符也是作为一个字符串使用。</p>
-<p>字符串也有很多操作方法：1）访问字符串中的某一个特定值；2）字符串的连接； 3）转义字符； 4）字符串的运算符； 5）字符串格式化； 6）内部函数，详情可以见<em><a target="_blank" rel="noopener" href="https://www.runoob.com/python/python-strings.html">https://www.runoob.com/python/python-strings.html</a></em></p>
+<p>字符串也有很多操作方法：1）访问字符串中的某一个特定值；2）字符串的连接； 3）转义字符； 4）字符串的运算符； 5）字符串格式化； 6）内部函数，详情可以见<a target="_blank" rel="noopener" href="https://www.runoob.com/python/python-strings.html">https://www.runoob.com/python/python-strings.html</a></p>
 <h4 id="列表List"><a href="#列表List" class="headerlink" title="列表List"></a>列表List</h4><p>列表可以完成大多数集合类的数据结构实现。它支持字符，数字，字符串甚至可以包含列表（即嵌套）。</p>
-<p>已做详细笔记，在此不多说。详情可见<a href="https://yeemj.github.io/posts/79b7c003/%EF%BC%8Chttps://www.runoob.com/python/python-lists.html">https://yeemj.github.io/posts/79b7c003/，https://www.runoob.com/python/python-lists.html</a></p>
+<p>已做详细笔记，在此不多说。详情可见<a href="https://yeemj.github.io/posts/79b7c003/">https://yeemj.github.io/posts/79b7c003/</a>，<a target="_blank" rel="noopener" href="https://www.runoob.com/python/python-lists.html">https://www.runoob.com/python/python-lists.html</a></p>
 <h4 id="元组Tuple"><a href="#元组Tuple" class="headerlink" title="元组Tuple"></a>元组Tuple</h4><p>元组与列表类似，不同之处在于元组的元素不能修改。</p>
 <p>元组使用小括号，列表使用方括号。</p>
 <p>元组创建很简单，只需要在括号中添加元素，并使用逗号隔开即可。</p>
-<p>详情：<em><a target="_blank" rel="noopener" href="https://www.runoob.com/python/python-tuples.html">https://www.runoob.com/python/python-tuples.html</a></em></p>
+<p>详情：<a target="_blank" rel="noopener" href="https://www.runoob.com/python/python-tuples.html">https://www.runoob.com/python/python-tuples.html</a></p>
 <p>常用用法：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#创建元组</span></span><br><span class="line">tup1 = ()</span><br><span class="line"></span><br><span class="line"><span class="comment">#只包含一个元素，需要在元素后面添加逗号</span></span><br><span class="line">tup2 = (<span class="number">1897</span>,)</span><br><span class="line"></span><br><span class="line"><span class="comment">#访问元组，跟列表一样，采用下标的方式</span></span><br><span class="line">tup3 = (<span class="number">1897</span>,<span class="string">&#x27;zju&#x27;</span>,<span class="string">&#x27;1949&#x27;</span>,<span class="string">&#x27;china&#x27;</span>)</span><br><span class="line">print(tup3[<span class="number">0</span>])</span><br><span class="line"><span class="comment">#&gt;&gt;1897</span></span><br><span class="line">print(tup3[<span class="number">0</span>:<span class="number">2</span>])</span><br><span class="line"><span class="comment">#&gt;&gt;(1897, &#x27;zju&#x27;)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#修改元组</span></span><br><span class="line"><span class="comment">#元组不可被修改</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#连接元组</span></span><br><span class="line">tup4 = tup1 + tup2 + tup3</span><br><span class="line">print(tup4)</span><br><span class="line"><span class="comment">#&gt;&gt;(1897, 1897, &#x27;zju&#x27;, &#x27;1949&#x27;, &#x27;china&#x27;)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#删除元组元素</span></span><br><span class="line"><span class="comment">#其实就是修改元组元素，不被允许</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#删除整个元组</span></span><br><span class="line">tup5 = (<span class="string">&#x27;2021&#x27;</span>,<span class="string">&#x27;04&#x27;</span>,<span class="string">&#x27;02&#x27;</span>)</span><br><span class="line"><span class="keyword">del</span> tup5</span><br><span class="line"><span class="comment">#之后要求输出元组会出错</span></span><br><span class="line">print(tup5)</span><br><span class="line"><span class="comment">#&gt;&gt;NameError: name &#x27;tup5&#x27; is not defined</span></span><br></pre></td></tr></table></figure>
 
 
 <h4 id="集合Set"><a href="#集合Set" class="headerlink" title="集合Set"></a>集合Set</h4><p>集合（set）是一个无序不重复元素的序列，使用大括号 {} 或者 set() 函数创建集合，注意：创建一个空集合必须用 set() 而不是 {} ，因为 {} 是用来创建一个空字典。</p>
-<p>详情：<em><a target="_blank" rel="noopener" href="https://www.runoob.com/python3/python3-set.html">https://www.runoob.com/python3/python3-set.html</a></em></p>
+<p>详情：<a target="_blank" rel="noopener" href="https://www.runoob.com/python3/python3-set.html">https://www.runoob.com/python3/python3-set.html</a></p>
 <p>常用用法：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#创建一个新的集合</span></span><br><span class="line">set1 = &#123;<span class="number">1897</span>, <span class="string">&#x27;zju&#x27;</span>&#125;</span><br><span class="line"><span class="comment">#采用set()办法创建集合，最多只能有一个元素</span></span><br><span class="line"><span class="comment">#set2 = set(1897, &#x27;zju&#x27;)  #TypeError: set expected at most 1 argument, got 2</span></span><br><span class="line"><span class="comment">#set2 = set(1897)   #TypeError: &#x27;int&#x27; object is not iterable</span></span><br><span class="line">set3 = <span class="built_in">set</span>(<span class="string">&#x27;1897&#x27;</span>)</span><br><span class="line">print(set3)</span><br><span class="line"><span class="comment">#&gt;&gt;&#123;&#x27;9&#x27;, &#x27;7&#x27;, &#x27;1&#x27;, &#x27;8&#x27;&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#集合不能被切片——因为是无序的</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#添加集合元素</span></span><br><span class="line"><span class="comment">#如果集合内部元素存在，不进行任何操作</span></span><br><span class="line">set1.add(<span class="number">1998</span>)</span><br><span class="line">set1.add(<span class="string">&#x27;yeemj&#x27;</span>)</span><br><span class="line">print(set1)</span><br><span class="line"><span class="comment">#&gt;&gt;&#123;1897, &#x27;yeemj&#x27;, 1998, &#x27;zju&#x27;&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#使用updata()添加元素</span></span><br><span class="line">set1.update(<span class="string">&#x27;china&#x27;</span>)</span><br><span class="line">print(set1)</span><br><span class="line"><span class="comment">#&gt;&gt;&#123;&#x27;i&#x27;, &#x27;n&#x27;, 1897, &#x27;yeemj&#x27;, &#x27;h&#x27;, &#x27;c&#x27;, 1998, &#x27;zju&#x27;, &#x27;a&#x27;&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#删除集合元素</span></span><br><span class="line">set1.discard(<span class="string">&#x27;yeemj&#x27;</span>)</span><br><span class="line">print(set1)</span><br><span class="line"><span class="comment">#&gt;&gt;&#123;&#x27;i&#x27;, &#x27;n&#x27;, 1897, &#x27;h&#x27;, &#x27;c&#x27;, 1998, &#x27;zju&#x27;, &#x27;a&#x27;&#125;</span></span><br><span class="line">set1.discard(<span class="string">&#x27;yeemj&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#采用remove()移除元素</span></span><br><span class="line"><span class="comment">#如果要移除的元素不存在，也会报错</span></span><br><span class="line">set1.remove(<span class="number">1897</span>)</span><br><span class="line">print(set1)</span><br><span class="line"><span class="comment">#&gt;&gt;&#123;&#x27;i&#x27;, &#x27;n&#x27;, &#x27;h&#x27;, &#x27;c&#x27;, 1998, &#x27;zju&#x27;, &#x27;a&#x27;&#125;</span></span><br><span class="line"><span class="comment">#set1.remove(1897)   #KeyError: 1897</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#检测集合的长度</span></span><br><span class="line">print(<span class="built_in">len</span>(set1))</span><br><span class="line"><span class="comment">#&gt;&gt;7</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#清空集合</span></span><br><span class="line">set1.clear()</span><br><span class="line">print(set1)</span><br><span class="line"><span class="comment">#&gt;&gt;set()</span></span><br><span class="line">print(<span class="built_in">len</span>(set1))</span><br><span class="line"><span class="comment">#&gt;&gt;0</span></span><br></pre></td></tr></table></figure>
 
@@ -218,7 +218,7 @@
 <h4 id="字典-Dic"><a href="#字典-Dic" class="headerlink" title="字典 Dic"></a>字典 Dic</h4><p>字典是一种映射类型，元素是键值对，字典的关键字必须为不可变类型，且不能重复。创建空字典使用 {} 。</p>
 <p>键必须是唯一的，但值则不必。</p>
 <p>值可以取任何数据类型，但键必须是不可变的，如字符串，数字。</p>
-<p>已做详细笔记，在此不多说。详细见<em><a href="https://yeemj.github.io/posts/32660952/*%EF%BC%8C*https://www.runoob.com/python3/python3-dictionary.html">https://yeemj.github.io/posts/32660952/*，*https://www.runoob.com/python3/python3-dictionary.html</a></em></p>
+<p>已做详细笔记，在此不多说。详细见<a href="https://yeemj.github.io/posts/32660952/">https://yeemj.github.io/posts/32660952/</a>，<a target="_blank" rel="noopener" href="https://www.runoob.com/python3/python3-dictionary.html">https://www.runoob.com/python3/python3-dictionary.html</a></p>
 <hr>
 <hr>
 <p>如有错误，敬请指出。</p>
@@ -509,6 +509,18 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">HEXO</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">读书</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">电影</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">思考</a>
               </li>
             
             <div class="clearfix"></div>

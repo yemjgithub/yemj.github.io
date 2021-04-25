@@ -23,7 +23,7 @@
 <meta property="og:image" content="d:/yeemjBlog/blog/source_posts/P27cookies.assets/image-20210417191839584.png">
 <meta property="og:image" content="d:/yeemjBlog/blog/source_posts/P27cookies.assets/image-20210417191907728.png">
 <meta property="article:published_time" content="2021-04-23T01:22:58.000Z">
-<meta property="article:modified_time" content="2021-04-23T01:51:57.416Z">
+<meta property="article:modified_time" content="2021-04-23T02:39:37.000Z">
 <meta property="article:author" content="yeemj">
 <meta property="article:tag" content="python爬虫基础">
 <meta name="twitter:card" content="summary">
@@ -77,7 +77,7 @@
 			</ul>
 		</nav>
 		<nav>
-			总文章数 27
+			总文章数 32
 		</nav>
 		<nav class="header-smart-menu">
     		
@@ -227,16 +227,13 @@
 <p>调用cookies的方法为第33行的代码：在post请求中传入cookies=cookies的参数。</p>
 <p>最后一行打印状态码的代码，是想运行整个代码后，能判断出评论到底有没有成功发表。只要状态码等于200，就说明服务器成功接收并响应了评论请求。</p>
 <p>解释一句：登录的cookies其实包含了很多名称和值，真正能帮助发表评论的cookies，只是取了登录cookies中某一小段值而已。所以登录的cookies和评论成功后，在【wp-comments-post.php】里的headers面板中看到的cookies是不一致的。</p>
-<h4 id="发表博客评论的小总结："><a href="#发表博客评论的小总结：" class="headerlink" title="发表博客评论的小总结："></a>发表博客评论的小总结：</h4><ol>
-<li><p>post带着参数请求登录（参数就是账号密码信息）</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">data = &#123;</span><br><span class="line"><span class="string">&#x27;log&#x27;</span>: <span class="string">&#x27;spiderman&#x27;</span>,  <span class="comment">#写入账户</span></span><br><span class="line"><span class="string">&#x27;pwd&#x27;</span>: <span class="string">&#x27;crawler334566&#x27;</span>,  <span class="comment">#写入密码</span></span><br><span class="line"><span class="string">&#x27;wp-submit&#x27;</span>: <span class="string">&#x27;登录&#x27;</span>,</span><br><span class="line"><span class="string">&#x27;redirect_to&#x27;</span>: <span class="string">&#x27;https://wordpress-edu-3autumn.localprod.oc.forchange.cn&#x27;</span>,</span><br><span class="line"><span class="string">&#x27;testcookie&#x27;</span>: <span class="string">&#x27;1&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">#把有关登录的参数封装成字典，赋值给data。</span></span><br><span class="line">login_in = requests.post(url,headers=headers,data=data)</span><br></pre></td></tr></table></figure></li>
-<li><p>获得登录的cookies：调用requests对象（login_in）的cookies属性获得登录的cookies</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cookies = login_in.cookies</span><br></pre></td></tr></table></figure></li>
-<li><p>带着cookies请求发表评论</p>
+<h4 id="发表博客评论的小总结："><a href="#发表博客评论的小总结：" class="headerlink" title="发表博客评论的小总结："></a>发表博客评论的小总结：</h4><p>post带着参数请求登录（参数就是账号密码信息）</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">data = &#123;</span><br><span class="line"><span class="string">&#x27;log&#x27;</span>: <span class="string">&#x27;spiderman&#x27;</span>,  <span class="comment">#写入账户</span></span><br><span class="line"><span class="string">&#x27;pwd&#x27;</span>: <span class="string">&#x27;crawler334566&#x27;</span>,  <span class="comment">#写入密码</span></span><br><span class="line"><span class="string">&#x27;wp-submit&#x27;</span>: <span class="string">&#x27;登录&#x27;</span>,</span><br><span class="line"><span class="string">&#x27;redirect_to&#x27;</span>: <span class="string">&#x27;https://wordpress-edu-3autumn.localprod.oc.forchange.cn&#x27;</span>,</span><br><span class="line"><span class="string">&#x27;testcookie&#x27;</span>: <span class="string">&#x27;1&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">#把有关登录的参数封装成字典，赋值给data。</span></span><br><span class="line">login_in = requests.post(url,headers=headers,data=data)</span><br></pre></td></tr></table></figure>
+<p>获得登录的cookies：调用requests对象（login_in）的cookies属性获得登录的cookies</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cookies = login_in.cookies</span><br></pre></td></tr></table></figure>
+<p>带着cookies请求发表评论</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">url_1 = <span class="string">&#x27;https://wordpress-edu-3autumn.localprod.oc.forchange.cn/wp-comments-post.php&#x27;</span></span><br><span class="line"><span class="comment">#想要评论的文章网址。</span></span><br><span class="line">data_1 = &#123;</span><br><span class="line"><span class="string">&#x27;comment&#x27;</span>: <span class="built_in">input</span>(<span class="string">&#x27;请输入你想要发表的评论：&#x27;</span>),</span><br><span class="line"><span class="string">&#x27;submit&#x27;</span>: <span class="string">&#x27;发表评论&#x27;</span>,</span><br><span class="line"><span class="string">&#x27;comment_post_ID&#x27;</span>: <span class="string">&#x27;13&#x27;</span>,</span><br><span class="line"><span class="string">&#x27;comment_parent&#x27;</span>: <span class="string">&#x27;0&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">#把有关评论的参数封装成字典。</span></span><br><span class="line">comment = requests.post(url_1,headers=headers,data=data_1,cookies=cookies)</span><br><span class="line"><span class="comment">#用requests.post发起发表评论的请求，放入参数：文章网址、headers、评论参数、cookies参数，赋值给comment。</span></span><br><span class="line"><span class="comment">#调用cookies的方法就是在post请求中传入cookies=cookies的参数。</span></span><br></pre></td></tr></table></figure>
-<h4 id="session（会话）及其用法"><a href="#session（会话）及其用法" class="headerlink" title="session（会话）及其用法"></a>session（会话）及其用法</h4></li>
-</ol>
-<p>用浏览器上网，到关闭浏览器的这一过程。session是会话过程中，服务器用来记录特定用户会话的信息。比如打开浏览器逛购物网页的整个过程中，浏览了哪些商品，在购物车里放了多少件物品，这些记录都会被服务器保存在session中。</p>
+<h4 id="session（会话）及其用法"><a href="#session（会话）及其用法" class="headerlink" title="session（会话）及其用法"></a>session（会话）及其用法</h4><p>用浏览器上网，到关闭浏览器的这一过程。session是会话过程中，服务器用来记录特定用户会话的信息。比如打开浏览器逛购物网页的整个过程中，浏览了哪些商品，在购物车里放了多少件物品，这些记录都会被服务器保存在session中。</p>
 <p>session和cookies的关系非常密切——cookies中存储着session的编码信息，session中又存储了cookies的信息。</p>
 <p>当浏览器第一次访问购物网页时，服务器会返回set cookies的字段给浏览器，而浏览器会把cookies保存到本地。</p>
 <p>等浏览器第二次访问这个购物网页时，就会带着cookies去请求，而因为cookies里带有会话的编码信息，服务器立马就能辨认出这个用户，同时返回和这个用户相关的特定编码的session。</p>
@@ -566,6 +563,18 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">HEXO</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">读书</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">电影</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">思考</a>
               </li>
             
             <div class="clearfix"></div>
