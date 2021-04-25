@@ -15,19 +15,11 @@
 <meta property="og:site_name" content="yeemj&#39;s blog">
 <meta property="og:description" content="借助Python发表博客评论——在不登录的情况下。 用cookies来做。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="d:/NoteBook/353Python小课/1日常学习/27cookies/image-20210417103406822.png">
-<meta property="og:image" content="d:/NoteBook/353Python小课/1日常学习/27cookies/image-20210417103908337.png">
-<meta property="og:image" content="d:/NoteBook/353Python小课/1日常学习/27cookies/image-20210417104127900.png">
-<meta property="og:image" content="d:/NoteBook/353Python小课/1日常学习/27cookies/image-20210417105238173.png">
-<meta property="og:image" content="d:/NoteBook/353Python小课/1日常学习/27cookies/image-20210417185540779.png">
-<meta property="og:image" content="d:/yeemjBlog/blog/source_posts/P27cookies.assets/image-20210417191839584.png">
-<meta property="og:image" content="d:/yeemjBlog/blog/source_posts/P27cookies.assets/image-20210417191907728.png">
 <meta property="article:published_time" content="2021-04-23T01:22:58.000Z">
-<meta property="article:modified_time" content="2021-04-23T02:39:37.000Z">
+<meta property="article:modified_time" content="2021-04-25T10:14:41.931Z">
 <meta property="article:author" content="yeemj">
 <meta property="article:tag" content="python爬虫基础">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="d:/NoteBook/353Python小课/1日常学习/27cookies/image-20210417103406822.png">
   
     <link rel="alternative" href="/atom.xml" title="yeemj&#39;s blog" type="application/atom+xml">
   
@@ -193,8 +185,6 @@
 
 <p>借助Python发表博客评论——在不登录的情况下。</p>
 <p>在写上账号密码之后，打开【检查】，在【network】选项中选择【preserve log】，再点击【登录】，查看【general】选项中的【Request URL】（请求网址）和【Request Method】（请求方式）。</p>
-<img src="D:\NoteBook\353Python小课\1日常学习\27cookies\image-20210417103406822.png" alt="image-20210417103406822" style="zoom:80%;" />
-
 <p><strong>请求方式是post，而不是get</strong></p>
 <p>post和get都可以带着参数请求，不过get请求的参数会在url上显示出来。但post请求的参数就不会直接显示，而是隐藏起来。像账号密码这种私密的信息，就应该用post的请求。</p>
 <p>通常，get请求会应用于获取网页数据，比如requests.get()。post请求则应用于向网页提交数据，比如提交表单类型数据（像账号密码就是网页表单的数据）。</p>
@@ -202,23 +192,17 @@
 <p>get和post是两种最常用的请求方式，除此之外，还有其他类型的请求方式，如head、options等，但一般很少用到。</p>
 </blockquote>
 <p>【requests headers】存储的是浏览器的请求信息，【response headers】存储的是服务器的响应信息。</p>
-<img src="D:\NoteBook\353Python小课\1日常学习\27cookies\image-20210417103908337.png" alt="image-20210417103908337" style="zoom:80%;" />
-
 <p>在【response headers】里有set cookies的参数。set cookies就是服务器往浏览器写入了cookies。</p>
 <h4 id="cookies及其用法"><a href="#cookies及其用法" class="headerlink" title="cookies及其用法"></a>cookies及其用法</h4><p>一般登录一个网站，会在登录页面看到一个可勾选的选项“记住我”，如果勾选了，以后再打开这个网站就会自动登录，这就是cookie在起作用。</p>
 <p>当登录博客账号spiderman，并勾选“记住我”，服务器就会生成一个cookies和spiderman这个账号绑定。接着，它把这个cookies告诉你的浏览器，让浏览器把cookies存储到本地电脑。当下一次，浏览器带着cookies访问博客，服务器会知道是spiderman，不需要再重复输入账号密码，即可直接访问。</p>
 <p>cookies也是有时效性的，过期后就会失效。</p>
 <p>【form data】</p>
-<img src="D:\NoteBook\353Python小课\1日常学习\27cookies\image-20210417104127900.png" alt="image-20210417104127900" style="zoom:80%;" />
-
 <p>log和pwd显然是账号和密码，wp-submit猜一下知道是登录的按钮，redirect_to后面带的链接是登录后会跳转到的这个页面网址，testcookie不知道是什么。</p>
 <p> 关于登录的参数找到了。现在可以尝试开始写代码，向服务器发起登录请求。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="comment">#引入requests。</span></span><br><span class="line">url = <span class="string">&#x27; https://wordpress-edu-3autumn.localprod.oc.forchange.cn/wp-login.php&#x27;</span></span><br><span class="line"><span class="comment">#把登录的网址赋值给url。###网址是登录按钮中general的网址【request url】</span></span><br><span class="line">headers = &#123;</span><br><span class="line"><span class="string">&#x27;User-Agent&#x27;</span>:<span class="string">&#x27;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.110 Safari/537.36&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">#加请求头，前面有说过加请求头是为了模拟浏览器正常的访问，避免被反爬虫。</span></span><br><span class="line">data = &#123;</span><br><span class="line"><span class="string">&#x27;log&#x27;</span>: <span class="string">&#x27;spiderman&#x27;</span>,  <span class="comment">#写入账户</span></span><br><span class="line"><span class="string">&#x27;pwd&#x27;</span>: <span class="string">&#x27;crawler334566&#x27;</span>,  <span class="comment">#写入密码</span></span><br><span class="line"><span class="string">&#x27;wp-submit&#x27;</span>: <span class="string">&#x27;登录&#x27;</span>,</span><br><span class="line"><span class="string">&#x27;redirect_to&#x27;</span>: <span class="string">&#x27;https://wordpress-edu-3autumn.localprod.oc.forchange.cn&#x27;</span>,</span><br><span class="line"><span class="string">&#x27;testcookie&#x27;</span>: <span class="string">&#x27;1&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">#把有关登录的参数封装成字典，赋值给data。  ###登录参数就是【form data】中的参数</span></span><br><span class="line">login_in = requests.post(url,headers=headers,data=data)</span><br><span class="line"><span class="comment">#用requests.post发起请求，放入参数：请求登录的网址、请求头和登录参数，然后赋值给login_in。</span></span><br><span class="line">print(login_in)</span><br><span class="line"><span class="comment">#打印login_in</span></span><br><span class="line"><span class="comment">#&gt;&gt; &lt;Response [200]&gt;</span></span><br></pre></td></tr></table></figure>
 <p>返回了200的状态码，意味着服务器接收到并响应了登录请求。</p>
-<h4 id="发表评论"><a href="#发表评论" class="headerlink" title="发表评论"></a>发表评论</h4><p>依然打开检查工具，发表一次评论，查看network的请求，点开【wp-comments-post.php】，看headers，发现</p>
+<h4 id="发表评论"><a href="#发表评论" class="headerlink" title="发表评论"></a>发表评论</h4><p>依然打开检查工具，发表一次评论，查看network的请求，点开【wp-comments-post.php】，看headers中的[from data]，发现</p>
 <p>刚刚发表的评论就藏在这里。</p>
-<img src="D:\NoteBook\353Python小课\1日常学习\27cookies\image-20210417105238173.png" alt="image-20210417105238173" style="zoom:67%;" />
-
 <p>comment是评论内容，submit是发表评论的按钮。</p>
 <p>还会发现【wp-comments-post.php】的数据并没有藏在XHR中，而是放在了Other里。原因是搭建网站时就写在了Other里，但常规情况下，大部分网站都会把这样的数据存储在XHR里，比如知乎的回答。</p>
 <p>想要发表博客评论，首先得登录，其次得提取和调用登录的cookies，然后还需要评论的参数，才能发起评论的请求。</p>
@@ -239,8 +223,6 @@
 <p>等浏览器第二次访问这个购物网页时，就会带着cookies去请求，而因为cookies里带有会话的编码信息，服务器立马就能辨认出这个用户，同时返回和这个用户相关的特定编码的session。</p>
 <p>这也是为什么每次重新登录购物网站后，之前在购物车放入的商品并不会消失的原因。因为在登录时，服务器可以通过浏览器携带的cookies，找到保存了购物车信息的session。</p>
 <h5 id="创建一个session来处理cookies"><a href="#创建一个session来处理cookies" class="headerlink" title="创建一个session来处理cookies"></a>创建一个session来处理cookies</h5><p>翻阅requests的官方文档：</p>
-<img src="D:\NoteBook\353Python小课\1日常学习\27cookies\image-20210417185540779.png" alt="image-20210417185540779" style="zoom:67%;" />
-
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="comment">#引用requests。</span></span><br><span class="line">session = requests.session()</span><br><span class="line"><span class="comment">#用requests.session()创建session对象，相当于创建了一个特定的会话，自动保持了cookies。</span></span><br><span class="line">url = <span class="string">&#x27;https://wordpress-edu-3autumn.localprod.oc.forchange.cn/wp-login.php&#x27;</span></span><br><span class="line">headers = &#123;</span><br><span class="line"><span class="string">&#x27;User-Agent&#x27;</span>:<span class="string">&#x27;Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line">data = &#123;</span><br><span class="line">    <span class="string">&#x27;log&#x27;</span>:<span class="built_in">input</span>(<span class="string">&#x27;请输入账号：&#x27;</span>), <span class="comment">#用input函数填写账号和密码，这样代码更优雅，而不是直接把账号密码填上去。</span></span><br><span class="line">    <span class="string">&#x27;pwd&#x27;</span>:<span class="built_in">input</span>(<span class="string">&#x27;请输入密码：&#x27;</span>),</span><br><span class="line">    <span class="string">&#x27;wp-submit&#x27;</span>:<span class="string">&#x27;登录&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;redirect_to&#x27;</span>:<span class="string">&#x27;https://wordpress-edu-3autumn.localprod.oc.forchange.cn&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;testcookie&#x27;</span>:<span class="string">&#x27;1&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line">session.post(url,headers=headers,data=data)</span><br><span class="line"><span class="comment">#在创建的session下用post发起登录请求，放入参数：请求登录的网址、请求头和登录参数。</span></span><br><span class="line"></span><br><span class="line">url_1 = <span class="string">&#x27;https://wordpress-edu-3autumn.localprod.oc.forchange.cn/wp-comments-post.php&#x27;</span></span><br><span class="line"><span class="comment">#把我们想要评论的文章网址赋值给url_1。</span></span><br><span class="line">data_1 = &#123;</span><br><span class="line"><span class="string">&#x27;comment&#x27;</span>: <span class="built_in">input</span>(<span class="string">&#x27;请输入你想要发表的评论：&#x27;</span>),</span><br><span class="line"><span class="string">&#x27;submit&#x27;</span>: <span class="string">&#x27;发表评论&#x27;</span>,</span><br><span class="line"><span class="string">&#x27;comment_post_ID&#x27;</span>: <span class="string">&#x27;13&#x27;</span>,</span><br><span class="line"><span class="string">&#x27;comment_parent&#x27;</span>: <span class="string">&#x27;0&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">#把有关评论的参数封装成字典。</span></span><br><span class="line">comment = session.post(url_1,headers=headers,data=data_1)</span><br><span class="line"><span class="comment">#在创建的session下用post发起评论请求，放入参数：文章网址，请求头和评论参数，并赋值给comment。</span></span><br><span class="line">print(comment)</span><br><span class="line"><span class="comment">#打印comment</span></span><br></pre></td></tr></table></figure>
 <p>其实这个代码并没有特别大的优化，每次还是需要输入账号密码登录，才能发表评论。</p>
 <h4 id="存储cookies"><a href="#存储cookies" class="headerlink" title="存储cookies"></a>存储cookies</h4><p>cookies能保存登录的状态，那在第一次登录时把cookies存储下来，等下次登录再把存储的cookies读取出来，这样就不用重复输入账号密码。</p>
@@ -251,10 +233,7 @@
 <p>可是txt文件存储的是字符串，cookies并不是字符串。那有没有能把cookies转成字符串的方法？</p>
 <p>json模块能把字典转成字符串！</p>
 <p>先把cookies转成字典，然后再通过json模块转成字符串。这样，就能用open函数把cookies存储成txt文件。</p>
-<p><strong>cookies转化成字典：</strong></p>
-<p><img src="D:\yeemjBlog\blog\source_posts\P27cookies.assets\image-20210417191839584.png" alt="image-20210417191839584"></p>
-<p><strong>json模块</strong></p>
-<p><img src="D:\yeemjBlog\blog\source_posts\P27cookies.assets\image-20210417191907728.png" alt="image-20210417191907728"></p>
+<p><strong>cookies转化成字典：json模块</strong></p>
 <p>把cookies存储成txt文件（这并不是最简单的办法）</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests,json</span><br><span class="line"><span class="comment">#引入requests和json模块。</span></span><br><span class="line">session = requests.session()   </span><br><span class="line">url = <span class="string">&#x27; https://wordpress-edu-3autumn.localprod.oc.forchange.cn/wp-login.php&#x27;</span></span><br><span class="line">headers = &#123;</span><br><span class="line"><span class="string">&#x27;User-Agent&#x27;</span>:<span class="string">&#x27;Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line">data = &#123;</span><br><span class="line"><span class="string">&#x27;log&#x27;</span>: <span class="built_in">input</span>(<span class="string">&#x27;请输入你的账号:&#x27;</span>),</span><br><span class="line"><span class="string">&#x27;pwd&#x27;</span>: <span class="built_in">input</span>(<span class="string">&#x27;请输入你的密码:&#x27;</span>),</span><br><span class="line"><span class="string">&#x27;wp-submit&#x27;</span>: <span class="string">&#x27;登录&#x27;</span>,</span><br><span class="line"><span class="string">&#x27;redirect_to&#x27;</span>: <span class="string">&#x27;https://wordpress-edu-3autumn.localprod.oc.forchange.cn&#x27;</span>,</span><br><span class="line"><span class="string">&#x27;testcookie&#x27;</span>: <span class="string">&#x27;1&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line">session.post(url, headers=headers, data=data)</span><br><span class="line"></span><br><span class="line">cookies_dict = requests.utils.dict_from_cookiejar(session.cookies)</span><br><span class="line"><span class="comment">#把cookies转化成字典。</span></span><br><span class="line">print(cookies_dict)</span><br><span class="line"><span class="comment">#打印cookies_dict</span></span><br><span class="line"></span><br><span class="line">cookies_str = json.dumps(cookies_dict)</span><br><span class="line"><span class="comment">#调用json模块的dumps函数，把cookies从字典再转成字符串。</span></span><br><span class="line">print(cookies_str)</span><br><span class="line"><span class="comment">#打印cookies_str</span></span><br><span class="line">f = <span class="built_in">open</span>(<span class="string">&#x27;cookies.txt&#x27;</span>, <span class="string">&#x27;w&#x27;</span>)</span><br><span class="line"><span class="comment">#创建名为cookies.txt的文件，以写入模式写入内容。</span></span><br><span class="line">f.write(cookies_str)</span><br><span class="line"><span class="comment">#把已经转成字符串的cookies写入文件。</span></span><br><span class="line">f.close()</span><br><span class="line"><span class="comment">#关闭文件。</span></span><br></pre></td></tr></table></figure>
 <h4 id="读取cookies"><a href="#读取cookies" class="headerlink" title="读取cookies"></a>读取cookies</h4><p>需要能够读取cookies，这样才能每次发表评论时都不需要重新输入账号和密码。</p>
@@ -550,15 +529,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">python基础</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">python小项目</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">python爬虫基础</a>
+                <a href="javascript:void(0)" class="js-tag color3">读书</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -566,11 +537,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">读书</a>
+                <a href="javascript:void(0)" class="js-tag color3">电影</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">电影</a>
+                <a href="javascript:void(0)" class="js-tag color4">python基础</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">python爬虫基础</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">python小项目</a>
               </li>
              
               <li class="article-tag-list-item">

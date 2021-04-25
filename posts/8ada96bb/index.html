@@ -15,20 +15,11 @@
 <meta property="og:site_name" content="yeemj&#39;s blog">
 <meta property="og:description" content="用python请求了远程服务器之后，拿到的内容，最常见的，会是一份原汁原味的HTML文档。 因此在解析数据之前，需要能够读懂、修改，编写HTML文档。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="d:/NoteBook/353Python小课/1日常学习/17HTML基础.assets/image-20210403080104083.png">
-<meta property="og:image" content="https://res.pandateacher.com/crawler-l1-3%E5%A4%87%E4%BB%BD%203.jpg">
-<meta property="og:image" content="https://res.pandateacher.com/crawler-l1-3%E5%A4%87%E4%BB%BD%202.png">
-<meta property="og:image" content="https://res.pandateacher.com/20200320152756.png">
-<meta property="og:image" content="https://res.pandateacher.com/2019-11-06-10-52-52.png">
-<meta property="og:image" content="https://res.pandateacher.com/crawler-l1-16-0-2019116.png">
-<meta property="og:image" content="d:/NoteBook/353Python小课/1日常学习/17HTML基础/image-20210403185243976.png">
-<meta property="og:image" content="d:/yeemjBlog/blog/source_posts/P17HTML基础.assets/image-20210403185805199.png">
 <meta property="article:published_time" content="2021-04-23T01:18:31.000Z">
-<meta property="article:modified_time" content="2021-04-23T01:51:57.363Z">
+<meta property="article:modified_time" content="2021-04-25T10:08:38.730Z">
 <meta property="article:author" content="yeemj">
 <meta property="article:tag" content="python爬虫基础">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="d:/NoteBook/353Python小课/1日常学习/17HTML基础.assets/image-20210403080104083.png">
   
     <link rel="alternative" href="/atom.xml" title="yeemj&#39;s blog" type="application/atom+xml">
   
@@ -199,25 +190,18 @@
 <p>声明过后，一共有<strong>三组</strong>基本元素，分别是html元素（<code>&lt;html&gt;&lt;/html&gt;</code>），head头元素（<code>&lt;head&gt;&lt;/head&gt;</code>），和body主体元素（<code>&lt;body&gt;&lt;/body&gt;</code>）。</p>
 <p>成对出现，都带有尖括号（<code>&lt;&gt;</code>&amp;<code>&lt;/&gt;</code>），分别代表着元素的<strong>起点</strong>和<strong>终点</strong>。</p>
 <p>最外层是<code>&lt;html&gt;</code>(<strong>文档起点</strong>)<code>&lt;/html&gt;</code>（<strong>文档终点</strong>），它的作用是标记文档的起始位置和终止位置，从层级上来看，将<code>&lt;head&gt;&lt;/head&gt;</code>（头部）和<code>&lt;body&gt;&lt;/body&gt;</code>（主题）包裹了起来。</p>
-<img src="D:\NoteBook\353Python小课\1日常学习\17HTML基础.assets\image-20210403080104083.png" alt="image-20210403080104083" style="zoom: 50%;" />
-
 <h5 id="层级结构"><a href="#层级结构" class="headerlink" title="层级结构"></a>层级结构</h5><ul>
-<li>头部元素（<code>&lt;head&gt;&lt;/head&gt;</code>）内，一般会被用来设置网页的编码，添加网页标签的小logo，小标题，外部文件引用。</li>
+<li><p>头部元素（<code>&lt;head&gt;&lt;/head&gt;</code>）内，一般会被用来设置网页的编码，添加网页标签的小logo，小标题，外部文件引用。</p>
+</li>
+<li><p>HTML文档的主体元素（<code>&lt;body&gt;&lt;/body&gt;</code>）负责定义网页窗口内的所有内容</p>
+</li>
 </ul>
-<img src="https://res.pandateacher.com/crawler-l1-3%E5%A4%87%E4%BB%BD%203.jpg" alt="img" style="zoom:50%;" />
-
-<ul>
-<li>HTML文档的主体元素（<code>&lt;body&gt;&lt;/body&gt;</code>）负责定义网页窗口内的所有内容</li>
-</ul>
-<p><img src="https://res.pandateacher.com/crawler-l1-3%E5%A4%87%E4%BB%BD%202.png" alt="img"></p>
 <p>主体元素（<code>&lt;body&gt;&lt;/body&gt;</code>）的腹中只有一个div元素（<code>&lt;div&gt;&lt;/div&gt;</code>），而div元素（<code>&lt;div&gt;&lt;/div&gt;</code>）手下有两个“关节”：图片元素（<code>&lt;img/&gt;</code>）和表单元素（<code>&lt;form&gt;&lt;/form&gt;</code>），表单元素（<code>&lt;form&gt;&lt;/form&gt;</code>）也有两节“骨头”，分别是input元素(<code>&lt;input/&gt;</code>)和按钮元素(<code>&lt;button&gt;</code>)。</p>
 <p>赋值语句：两大类：标签和属性。</p>
 <h5 id="标签"><a href="#标签" class="headerlink" title="标签"></a>标签</h5><p>标签用于标记文本信息，指用尖括号（<code>&lt;&gt;</code>和<code>&lt;/&gt;</code>）括起来的字母和英文，形式有两种：闭合标签和空标签。</p>
 <p><strong>闭合标签</strong>，它们绝大多数成对出现（有开始标签<code>&lt;&gt;</code>,也有结束标签<code>&lt;/&gt;</code>），如：<code>&lt;title&gt;和&lt;/title&gt;</code>是标题标签，<code>&lt;div&gt;和&lt;/div&gt;</code>是块标签，<code>&lt;form&gt;和&lt;/form&gt;</code>是表单标签。</p>
 <p><strong>空标签</strong>，只有一个尖括号<code>&lt;&gt;</code>（斜杠<code>/</code>可省略），标签开始即结束，比如上面的<code>&lt;img /&gt;</code>是图片标签，<code>&lt;link /&gt;</code>是链接标签，<code>&lt;input /&gt;</code>是input标签。</p>
 <p>元素，是包含了开始标签和结束标签的所有代码。</p>
-<img src="https://res.pandateacher.com/20200320152756.png" alt="img" style="zoom:80%;" />
-
 <p><code>&lt;!-- --&gt;</code>作用相当于python中的<code>#</code>，是HTML的注释方式。</p>
 <h5 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h5><p>属性是刻画html文档的形象。</p>
 <p>（设置图片链接的<strong>src属性</strong>（<code>src=&#39;xx&#39;</code>），<strong>alt属性</strong>可编辑当图片无法显示时的替代文本）</p>
@@ -229,18 +213,11 @@
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="css">            <span class="selector-class">.book</span> &#123;</span></span><br><span class="line">                padding: 0px;</span><br><span class="line">                margin: 0px;</span><br><span class="line">            &#125;</span><br><span class="line"><span class="css">            <span class="selector-id">#book_info</span> &#123;</span></span><br><span class="line">                width: 450px;</span><br><span class="line">                font-size: 13px;</span><br><span class="line">            &#125;</span><br><span class="line">        <span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">h1</span> <span class="attr">align</span>=<span class="string">&#x27;center&#x27;</span> <span class="attr">style</span>=<span class="string">&#x27;color: #20b2aa;&#x27;</span>&gt;</span>这个书苑不太冷<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">h2</span> <span class="attr">style</span>=<span class="string">&quot; font-weight: bold;padding-bottom: 3px;margin-bottom: 16px;border-bottom: 1px solid #ddd;&quot;</span>&gt;</span>吴枫喜欢的书:<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;book&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">img</span> <span class="attr">style</span>=<span class="string">&#x27;float: left;margin-right: 20px;height: 200px;&#x27;</span> <span class="attr">src</span>=<span class="string">&quot;https://res.pandateacher.com/book_qidianyimin.jpg&quot;</span> <span class="attr">alt</span>=<span class="string">&quot;奇点遗民&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&#x27;book&#x27;</span> <span class="attr">id</span>=<span class="string">&quot;book_info&quot;</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">h4</span>&gt;</span>《奇点遗民》<span class="tag">&lt;/<span class="name">h4</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">p</span> <span class="attr">style</span>=<span class="string">&#x27;color:#4c4a4a;&#x27;</span>&gt;</span>本书精选收录了刘宇昆的科幻佳作共22篇。《奇点遗民》融入了科幻艺术吸引人的几大元素：数字化生命、影像化记忆、人工智能、外星访客……刘宇昆的独特之处在于，他写的不是科幻探险或英雄奇幻，而是数据时代里每个人的生活和情感变化。透过这本书，我们看到的不仅是未来还有当下。</span><br><span class="line">                <span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;https://wordpress-edu-3autumn.localprod.oc.forchange.cn/&quot;</span>&gt;</span>点这里看看<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p>重点关注第18行和第20行代码，显然，两个div元素含有同一个<code>class</code>属性值<code>book</code>，两个元素都可以使用<code>.book</code>的样式，但只有<code>id=&quot;book_info&quot;</code>的元素可以使用<code>#book_info</code>的样式。</p>
 <p>在<code>&lt;style&gt;</code>标签中定义class属性的样式用点<code>.</code>，id属性用井号键<code>#</code>。</p>
-<img src="https://res.pandateacher.com/2019-11-06-10-52-52.png" alt="img" style="zoom: 25%;" />
-
-<img src="https://res.pandateacher.com/crawler-l1-16-0-2019116.png" alt="img" style="zoom: 67%;" />
-
 <h4 id="HTML分析"><a href="#HTML分析" class="headerlink" title="HTML分析"></a>HTML分析</h4><p>分析<code>HTML</code>文档的“神器” —— 浏览器的<strong>开发者工具</strong>。</p>
 <h5 id="开发者工具——查看HTML的源代码"><a href="#开发者工具——查看HTML的源代码" class="headerlink" title="开发者工具——查看HTML的源代码"></a>开发者工具——查看<code>HTML</code>的源代码</h5><p>右键——检查选项/或者直接按 F12</p>
 <h5 id="开发者彩蛋"><a href="#开发者彩蛋" class="headerlink" title="开发者彩蛋"></a>开发者彩蛋</h5><p>打开<a target="_blank" rel="noopener" href="https://www.baidu.com/">百度</a>网页下的开发者工具，点击开发者工具导航栏上的<code>Console</code>标签，发现百度的招聘链接。</p>
 <p>除了百度，<a target="_blank" rel="noopener" href="https://pro.jd.com/">京东</a>、<a target="_blank" rel="noopener" href="https://www.zhihu.com/">知乎</a>等网页也有类似的招聘彩蛋。</p>
-<img src="D:\NoteBook\353Python小课\1日常学习\17HTML基础\image-20210403185243976.png" alt="image-20210403185243976" style="zoom:67%;" />
-
-<h5 id="修改网页"><a href="#修改网页" class="headerlink" title="修改网页"></a>修改网页</h5><p><img src="D:\yeemjBlog\blog\source_posts\P17HTML基础.assets\image-20210403185805199.png" alt="image-20210403185805199"></p>
-<p>定位所要查找的网页内容的源代码。用鼠标在源代码上从网页头到尾轻轻滑过（无需点击），查看当前代码被浏览器解析后呈现的内容。</p>
+<h5 id="修改网页"><a href="#修改网页" class="headerlink" title="修改网页"></a>修改网页</h5><p>定位所要查找的网页内容的源代码。用鼠标在源代码上从网页头到尾轻轻滑过（无需点击），查看当前代码被浏览器解析后呈现的内容。</p>
 <p>定位到想要修改的部分，双击进行修改，然后enter确认，就会修改成功。</p>
 <p>当然，这样的修改只是在<strong>本地的修改</strong>，而服务器上的源文件你是修改不了的。</p>
 <p>如果重新刷新网页，修改的所有内容都会被清空。所以，这些改动仅供自娱自乐。而程序员们会使用这个方法，在开发者工具这里，调试HTML代码。</p>
@@ -525,15 +502,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">python基础</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">python小项目</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">python爬虫基础</a>
+                <a href="javascript:void(0)" class="js-tag color3">读书</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -541,11 +510,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">读书</a>
+                <a href="javascript:void(0)" class="js-tag color3">电影</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">电影</a>
+                <a href="javascript:void(0)" class="js-tag color4">python基础</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">python爬虫基础</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">python小项目</a>
               </li>
              
               <li class="article-tag-list-item">

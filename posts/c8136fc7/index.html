@@ -16,7 +16,7 @@
 <meta property="og:description" content="爬虫基础，获取数据，采用requests模块。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-04-23T01:18:14.000Z">
-<meta property="article:modified_time" content="2021-04-23T01:51:57.363Z">
+<meta property="article:modified_time" content="2021-04-25T10:07:22.073Z">
 <meta property="article:author" content="yeemj">
 <meta property="article:tag" content="python爬虫基础">
 <meta name="twitter:card" content="summary">
@@ -248,8 +248,8 @@
 <h4 id="爬虫规则"><a href="#爬虫规则" class="headerlink" title="爬虫规则"></a>爬虫规则</h4><p><code>robots</code>协议是互联网爬虫的一项公认的道德规范，全称是“网络爬虫排除标准”（robots exclusion protocol），这个协议告诉，哪些页面是可以抓取的，哪些不可以。</p>
 <p>使用<code>robots</code>协议的场景通常是：看到想获取的内容后，检查一下<strong>网站</strong>是否允许爬取。因此需要能<strong>找到</strong>、简单<strong>读懂</strong>robots协议。</p>
 <p>域名和网址（url）</p>
-<p>网址：<a target="_blank" rel="noopener" href="https://www.pypypy.cn/#/apps/2/lecture/5f56e7fc300055000153a225">https://www.pypypy.cn/#/apps/2/lecture/5f56e7fc300055000153a225</a></p>
-<p>域名：<a target="_blank" rel="noopener" href="http://www.pypypy.cn/">www.pypypy.cn</a></p>
+<p>网址:<a target="_blank" rel="noopener" href="https://www.pypypy.cn/#/apps/2/lecture/5f56e7fc300055000153a225">https://www.pypypy.cn/#/apps/2/lecture/5f56e7fc300055000153a225</a></p>
+<p>域名：&lt;<a target="_blank" rel="noopener" href="http://www.pypypy.cn&gt;/">www.pypypy.cn&gt;</a></p>
 <h5 id="一部分淘宝的robots协议"><a href="#一部分淘宝的robots协议" class="headerlink" title="一部分淘宝的robots协议"></a>一部分淘宝的robots协议</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">User-agent:  Baiduspider <span class="comment"># 百度爬虫</span></span><br><span class="line">Allow:  /article <span class="comment"># 允许访问 article </span></span><br><span class="line">Allow:  /oshtml <span class="comment"># 允许访问 oshtml </span></span><br><span class="line">Allow:  /ershou <span class="comment"># 允许访问 ershou </span></span><br><span class="line">Allow: /$ <span class="comment"># 允许访问根目录，即淘宝主页</span></span><br><span class="line">Disallow:  /product/ <span class="comment"># 禁止访问product文件夹下面的所有文件，但是product文件夹本身允许被访问</span></span><br><span class="line">Disallow:  / <span class="comment"># 禁止访问除 Allow 规定页面之外的其他所有页面</span></span><br><span class="line"></span><br><span class="line">User-Agent:  Googlebot <span class="comment"># 谷歌爬虫</span></span><br><span class="line">Allow:  /article</span><br><span class="line">Allow:  /oshtml</span><br><span class="line">Allow:  /product <span class="comment"># 允许访问product文件夹及product文件夹下面的所有文件</span></span><br><span class="line">Allow:  /spu</span><br><span class="line">Allow:  /dianpu</span><br><span class="line">Allow:  /oversea</span><br><span class="line">Allow:  /<span class="built_in">list</span></span><br><span class="line">Allow:  /ershou</span><br><span class="line">Allow: /$</span><br><span class="line">Disallow:  / <span class="comment"># 禁止访问除 Allow 规定页面之外的其他所有页面</span></span><br><span class="line"></span><br><span class="line">User-Agent:  * <span class="comment"># 其他爬虫</span></span><br><span class="line">Disallow:  / <span class="comment"># 禁止访问所有页面</span></span><br></pre></td></tr></table></figure>
 <p><code>User-Agent</code> ：爬虫类型。自己写的爬虫，要看<code>User-Agent:  *</code></p>
 <p><code>Allow</code>代表允许被访问，<code>Disallow</code>代表禁止被访问。字段对应的值都含有路径分隔符<code>/</code>，限制了哪些或哪一层目录的内容是允许或者禁止被访问的。</p>
@@ -531,15 +531,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">python基础</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">python小项目</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">python爬虫基础</a>
+                <a href="javascript:void(0)" class="js-tag color3">读书</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -547,11 +539,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">读书</a>
+                <a href="javascript:void(0)" class="js-tag color3">电影</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">电影</a>
+                <a href="javascript:void(0)" class="js-tag color4">python基础</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">python爬虫基础</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">python小项目</a>
               </li>
              
               <li class="article-tag-list-item">

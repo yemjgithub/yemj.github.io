@@ -15,23 +15,14 @@
 <meta property="og:site_name" content="yeemj&#39;s blog">
 <meta property="og:description" content="用Network获取浏览器的踪迹，学习json">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://res.pandateacher.com/crawler-l3-5-201914.png">
-<meta property="og:image" content="d:/yeemjBlog/blog/source_posts/P20爬取数据Network-XHR-JSON.assets/image-20210405110414691.png">
-<meta property="og:image" content="d:/yeemjBlog/blog/source_posts/P20爬取数据Network-XHR-JSON.assets/image-20210405110646823.png">
 <meta property="og:image" content="d:/yeemjBlog/blog/source_posts/P20爬取数据Network-XHR-JSON.assets/image-20210405112521480.png">
 <meta property="og:image" content="d:/yeemjBlog/blog/source_posts/P20爬取数据Network-XHR-JSON.assets/image-20210405112555443.png">
-<meta property="og:image" content="d:/NoteBook/353Python小课/1日常学习/20爬取数据2Network%20XHR%20json/image-20210405112801699.png">
-<meta property="og:image" content="d:/NoteBook/353Python小课/1日常学习/20爬取数据2Network%20XHR%20json/image-20210405112911252.png">
-<meta property="og:image" content="d:/NoteBook/353Python小课/1日常学习/20爬取数据2Network%20XHR%20json/image-20210405113551213.png">
-<meta property="og:image" content="d:/NoteBook/353Python小课/1日常学习/20爬取数据2Network%20XHR%20json/image-20210405113732710.png">
-<meta property="og:image" content="d:/NoteBook/353Python小课/1日常学习/20爬取数据2Network%20XHR%20json/image-20210405113846762.png">
-<meta property="og:image" content="d:/NoteBook/353Python小课/1日常学习/20爬取数据2Network%20XHR%20json/image-20210405115247897.png">
 <meta property="article:published_time" content="2021-04-23T01:20:36.000Z">
-<meta property="article:modified_time" content="2021-04-23T01:51:57.401Z">
+<meta property="article:modified_time" content="2021-04-25T10:11:10.613Z">
 <meta property="article:author" content="yeemj">
 <meta property="article:tag" content="python爬虫基础">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://res.pandateacher.com/crawler-l3-5-201914.png">
+<meta name="twitter:image" content="d:/yeemjBlog/blog/source_posts/P20爬取数据Network-XHR-JSON.assets/image-20210405112521480.png">
   
     <link rel="alternative" href="/atom.xml" title="yeemj&#39;s blog" type="application/atom+xml">
   
@@ -204,19 +195,15 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(res_music.text)</span><br></pre></td></tr></table></figure>
 <p>*其实这个结果有点像之前的那个，为空。</p>
 <h4 id="翻找Network"><a href="#翻找Network" class="headerlink" title="翻找Network"></a>翻找Network</h4><h5 id="Network"><a href="#Network" class="headerlink" title="Network"></a>Network</h5><p><code>Network</code>的功能是：记录在当前页面上发生的所有请求。看上去好像空空如也的样子，是因为<code>Network</code>记录的是实时网络请求。网页都已经加载完成，所以不会有东西。</p>
-<p>重新访问网络，就会有记录：</p>
-<img src="https://res.pandateacher.com/crawler-l3-5-201914.png" alt="img" style="zoom:80%;" />
-
+<p>重新访问网络，就会有记录。</p>
 <p>在图最下面：此处共有52个请求，36.9kb的流量，耗时2.73s完成。</p>
 <p>也说明了浏览器每时每刻工作的真相：它总是在向服务器，发起各式各样的请求。当这些请求完成，它们会一起组成在<code>Elements</code>中看到的网页源代码。</p>
 <p>为什么刚才没办法拿到歌曲清单呢？答，这是因为刚刚写的代码，只是模拟了这52个请求中的一个（准确来说，就是第0个请求），而这个请求里并不包含歌曲清单。挪动鼠标，找到这个页面的第0个请求：<code>search.html</code>，然后点击它，如下图，查看它的<code>Response</code>（官方翻译叫“响应”，可以理解为服务器对浏览器这个请求的回应内容，即请求的结果）。</p>
-<p><img src="D:\yeemjBlog\blog\source_posts\P20爬取数据Network-XHR-JSON.assets\image-20210405110414691.png" alt="image-20210405110414691"></p>
 <p>它就是用<code>requests.get()</code>获取到的网页源代码，它里面不包含歌曲清单。</p>
 <p>一般来说，都是这种第0个请求先启动了，其他的请求才会关联启动，一点点地将网页给填充起来。</p>
 <p>也有一些网页，直接把所有的关键信息都放在第0个请求里，尤其是一些比较老（或比较轻量）的网站，我们用<code>requests</code>和<code>BeautifulSoup</code>就能解决它们（所以之前的都能成功）</p>
 <p>为了成功抓取到歌曲清单。得先找到歌名藏在哪一个请求当中。再用<code>requests</code>库，去模拟这个请求。</p>
 <h5 id="Network的用法"><a href="#Network的用法" class="headerlink" title="Network的用法"></a>Network的用法</h5><p><code>Network</code>面板</p>
-<p><img src="D:\yeemjBlog\blog\source_posts\P20爬取数据Network-XHR-JSON.assets\image-20210405110646823.png" alt="image-20210405110646823"></p>
 <ul>
 <li><p>第0行的左侧，红色的圆钮是启用<code>Network</code>监控（默认高亮打开），灰色圆圈是清空面板上的信息。右侧勾选框<code>Preserve log</code>，它的作用是“保留请求日志”。如果不点击这个，当发生页面跳转的时候，记录就会被清空。所以，在爬取一些会发生跳转的网页时，会点亮它。</p>
 </li>
@@ -318,20 +305,10 @@
 <p><img src="D:\yeemjBlog\blog\source_posts\P20爬取数据Network-XHR-JSON.assets\image-20210405112555443.png" alt="image-20210405112555443"></p>
 <p>右上方框里标号的内容，从左往右分别是：<code>Headers</code>：标头（请求信息）、<code>Preview</code>：预览、<code>Response</code>：响应、<code>Cookies</code>：Cookies、<code>Timing</code>：时间。</p>
 <p>点击<code>Preview</code>，能在里面发现我们想要的信息：歌名就藏在里面！（只是有点难找，需要一层一层展开：<code>data-song-list-0-name</code>，然后就能看到“晴天”）</p>
-<img src="D:\NoteBook\353Python小课\1日常学习\20爬取数据2Network XHR json\image-20210405112801699.png" alt="image-20210405112801699" style="zoom:80%;" />
-
-<p>那如何把这些歌曲名拿到呢？需要去看看最左侧的<code>Headers</code>，点击它。如下所示，它被分为四个板块。</p>
-<img src="D:\NoteBook\353Python小课\1日常学习\20爬取数据2Network XHR json\image-20210405112911252.png" alt="image-20210405112911252" style="zoom:67%;" />
-
+<p>那如何把这些歌曲名拿到呢？需要去看看最左侧的<code>Headers</code>，点击它，被分为四个板块。</p>
 <p>在此重点放在<code>General</code>上：</p>
-<img src="D:\NoteBook\353Python小课\1日常学习\20爬取数据2Network XHR json\image-20210405113551213.png" alt="image-20210405113551213" style="zoom:80%;" />
-
 <p><code>General</code>里的<code>Requests URL</code>就是应该去访问的链接。如果在浏览器中打开这个链接，会看到一个让人绝望的结构：最外层是一个字典，然后里面又是字典，往里面又有列表和字典……</p>
-<img src="D:\NoteBook\353Python小课\1日常学习\20爬取数据2Network XHR json\image-20210405113732710.png" alt="image-20210405113732710" style="zoom: 50%;" />
-
-<p>就和你在<code>Response</code>里看到的一个样。还是放弃挣扎，回到原网址，直接用<code>Preview</code>来看就好。列表和字典在此都会有非常清晰的结构，层层展开。</p>
-<img src="D:\NoteBook\353Python小课\1日常学习\20爬取数据2Network XHR json\image-20210405113846762.png" alt="image-20210405113846762" style="zoom:80%;" />
-
+<p>就和<code>Response</code>里看到的一个样。还是放弃挣扎，回到原网址，直接用<code>Preview</code>来看就好。列表和字典在此都会有非常清晰的结构，层层展开。</p>
 <p>按照这个顺序：<code>data-song-list-0-name</code></p>
 <p>歌曲名就在这里，它的键是<code>name</code>。</p>
 <p>理解话：这个<code>XHR</code>是一个字典，键<code>data</code>对应的值也是一个字典；在该字典里，键<code>song</code>对应的值也是一个字典；在该字典里，键<code>list</code>对应的值是一个列表；在该列表里，一共有10个元素；每一个元素都是一个字典；在每个字典里，键<code>name</code>的值，对应的是歌曲名。</p>
@@ -348,8 +325,6 @@
 <p>而<code>json</code>和<code>XHR</code>之间的关系：<code>XHR</code>用于传输数据，能传输很多种数据，<code>json</code>是被传输的一种数据格式。就是这样而已。</p>
 <p>可以将<code>json</code>格式的数据，转换成正常的列表/字典，也可以将列表/字典，转换成<code>json</code>。</p>
 <h5 id="json数据的解析"><a href="#json数据的解析" class="headerlink" title="json数据的解析"></a>json数据的解析</h5><p>请求得到了<code>json</code>数据，应该如何读取，可以在<code>requests</code>库的官方文档中，找到答案。</p>
-<img src="D:\NoteBook\353Python小课\1日常学习\20爬取数据2Network XHR json\image-20210405115247897.png" alt="image-20210405115247897" style="zoom:80%;" />
-
 <p>代码很简单：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line">r = requests.get(<span class="string">&#x27;https://api.github.com/events&#x27;</span>)</span><br><span class="line">r.json()</span><br><span class="line">print(r.json())</span><br></pre></td></tr></table></figure>
 <p>尝试：</p>
@@ -653,15 +628,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">python基础</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">python小项目</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">python爬虫基础</a>
+                <a href="javascript:void(0)" class="js-tag color3">读书</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -669,11 +636,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">读书</a>
+                <a href="javascript:void(0)" class="js-tag color3">电影</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">电影</a>
+                <a href="javascript:void(0)" class="js-tag color4">python基础</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">python爬虫基础</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">python小项目</a>
               </li>
              
               <li class="article-tag-list-item">

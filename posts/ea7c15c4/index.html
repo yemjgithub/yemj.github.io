@@ -15,14 +15,11 @@
 <meta property="og:site_name" content="yeemj&#39;s blog">
 <meta property="og:description" content="爬取数据的一个小总结。 静态网页和动态网页。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://res.pandateacher.com/2019-10-21-15-56-22.png">
-<meta property="og:image" content="d:/NoteBook/353Python小课/1日常学习/25数据爬取总结1/image-20210412195322355.png">
 <meta property="article:published_time" content="2021-04-23T01:22:15.000Z">
-<meta property="article:modified_time" content="2021-04-23T01:51:57.394Z">
+<meta property="article:modified_time" content="2021-04-25T10:13:04.740Z">
 <meta property="article:author" content="yeemj">
 <meta property="article:tag" content="python爬虫基础">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://res.pandateacher.com/2019-10-21-15-56-22.png">
   
     <link rel="alternative" href="/atom.xml" title="yeemj&#39;s blog" type="application/atom+xml">
   
@@ -187,8 +184,6 @@
 <a id="more"></a>
 
 <p>从<code>Response</code>对象开始，就分成了两条路径，一条路径是数据放在HTML里，用<code>BeautifulSoup</code>库去解析数据和提取数据；另一条，数据作为<code>Json</code>存储起来，用<code>response.json()</code>方法去解析，然后提取、存储数据。</p>
-<img src="https://res.pandateacher.com/2019-10-21-15-56-22.png" alt="img" style="zoom: 33%;" />
-
 <p>有时候按照属性提取，然后打印出来内容，发现是空列表</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 导入模块</span></span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">from</span> bs4 <span class="keyword">import</span> BeautifulSoup</span><br><span class="line"></span><br><span class="line"><span class="comment"># 发起请求,将响应的结果赋值给变量res。</span></span><br><span class="line">url=<span class="string">&#x27;https://www.toutiao.com/search/?keyword=%E7%89%B9%E6%9C%97%E6%99%AE%EF%BC%9A&#x27;</span></span><br><span class="line">res=requests.get(url)</span><br><span class="line"><span class="comment"># 用bs进行解析</span></span><br><span class="line">bstitle=BeautifulSoup(res.text,<span class="string">&#x27;html.parser&#x27;</span>)</span><br><span class="line"><span class="comment"># 提取我们想要的标签和里面的内容</span></span><br><span class="line">title=bstitle.find_all(class_=<span class="string">&#x27;title-box&#x27;</span>)</span><br><span class="line"><span class="comment"># 打印title</span></span><br><span class="line">print(title)</span><br><span class="line"><span class="comment">#&gt;&gt;[]</span></span><br></pre></td></tr></table></figure>
 <p>此时可以打印出<code>网页源代码</code>和<code>网页访问状态码</code>来查看一下爬取的内容与状态。</p>
@@ -198,8 +193,7 @@
 <p>当直接爬取界面上看到的url，打印出网页访问状态码和网页源代码，当爬取的状态码是200，网页源码内容却与直接从网页上看到的不符时，那么就说明网页是动态网页。</p>
 </blockquote>
 <p>还有一个更加方便的方法，可以直接在谷歌浏览器里看出网页是否是动态的。</p>
-<img src="D:\NoteBook\353Python小课\1日常学习\25数据爬取总结1\image-20210412195322355.png" alt="image-20210412195322355" style="zoom:33%;" />
-
+<p>Network-preview</p>
 <p>如果preview和网页上看到的内容一致，那么就是静态网页，反之，则是动态网页。</p>
 <p>静态网页直接爬取当前浏览器上显示的网页就可以了，而对于动态网页，处理就是四步走：右键检查——network——xhr——刷新界面，然后来查找需要的数据存放在哪个xhr文件中。</p>
 <p>面对一堆xhr文件该如何快速找到想要的那个？对于经验丰富的爬虫工程师来说，看xhr之中的文件名可以更快看出数据在哪。也可以逐个点开xhr文件，通过查看preview来确定数据所在的xhr位置。</p>
@@ -493,15 +487,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">python基础</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">python小项目</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">python爬虫基础</a>
+                <a href="javascript:void(0)" class="js-tag color3">读书</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -509,11 +495,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">读书</a>
+                <a href="javascript:void(0)" class="js-tag color3">电影</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">电影</a>
+                <a href="javascript:void(0)" class="js-tag color4">python基础</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">python爬虫基础</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">python小项目</a>
               </li>
              
               <li class="article-tag-list-item">

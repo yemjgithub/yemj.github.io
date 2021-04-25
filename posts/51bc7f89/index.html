@@ -15,20 +15,13 @@
 <meta property="og:site_name" content="yeemj&#39;s blog">
 <meta property="og:description" content="爬取歌曲的评论。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://res.pandateacher.com/crawler-l4-11-201919.png">
-<meta property="og:image" content="d:/yeemjBlog/blog/source_posts/P21爬取歌曲的评论.assets/image-20210406133710305.png">
-<meta property="og:image" content="d:/NoteBook/353Python小课/1日常学习/21爬取数据3/image-20210406134817126.png">
-<meta property="og:image" content="d:/NoteBook/353Python小课/1日常学习/21爬取数据3/image-20210406135125857.png">
-<meta property="og:image" content="d:/yeemjBlog/blog/source_posts/P21爬取歌曲的评论.assets/image-20210406135846528.png">
-<meta property="og:image" content="d:/NoteBook/353Python小课/1日常学习/21爬取数据3/image-20210406140724288.png">
 <meta property="og:image" content="d:/yeemjBlog/blog/source_posts/P21爬取歌曲的评论.assets/image-20210406143751613.png">
-<meta property="og:image" content="d:/NoteBook/353Python小课/1日常学习/21爬取数据3/image-20210406144117194.png">
 <meta property="article:published_time" content="2021-04-23T01:21:07.000Z">
-<meta property="article:modified_time" content="2021-04-23T01:51:57.379Z">
+<meta property="article:modified_time" content="2021-04-25T10:12:06.450Z">
 <meta property="article:author" content="yeemj">
 <meta property="article:tag" content="python小项目">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://res.pandateacher.com/crawler-l4-11-201919.png">
+<meta name="twitter:image" content="d:/yeemjBlog/blog/source_posts/P21爬取歌曲的评论.assets/image-20210406143751613.png">
   
     <link rel="alternative" href="/atom.xml" title="yeemj&#39;s blog" type="application/atom+xml">
   
@@ -204,19 +197,14 @@
 <li><p><code>XHR</code>还挺多，有四五十个。常规来说有两种方法来寻找<code>XHR</code>：阅读name`看看哪个可能是评论；或者是一个一个翻。</p>
 </li>
 <li><p>有一个简单的小技巧：先把<code>Network</code>面板清空，再点击一下精彩评论的<strong>点击加载更多</strong>，看看有没有多出来的新<code>XHR</code>，多出来的那一个，就应该是和评论相关的。</p>
-<img src="https://res.pandateacher.com/crawler-l4-11-201919.png" alt="img" style="zoom:50%;" />
-
-<p><img src="D:\yeemjBlog\blog\source_posts\P21爬取歌曲的评论.assets\image-20210406133710305.png" alt="image-20210406133710305"></p>
 </li>
 <li><p>点开请求的<code>Preview</code>，能够在[‘comment’][‘commentlist’]里找到评论列表。列表的每一个元素都是字典，字典里键<code>rootcommentcontent</code>对应的值，就是要找的评论。</p>
 </li>
 <li><p>找到拥有评论数据的页面链接（请求的Headers栏：General中的Request URL）</p>
-<img src="D:\NoteBook\353Python小课\1日常学习\21爬取数据3\image-20210406134817126.png" alt="image-20210406134817126" style="zoom:80%;" />
 </li>
 <li><p>长链接，阅读体验非常之差。<code>Network</code>面板提供了一个更友好的查看方式：</p>
 </li>
 <li><p>上面找到XHR的地方，选中Headers，保持<code>General</code>打开，保持<code>Response Headers</code>和<code>Request Headers</code>关闭。点开<code>Query String Parameters</code>。</p>
-<img src="D:\NoteBook\353Python小课\1日常学习\21爬取数据3\image-20210406135125857.png" alt="image-20210406135125857" style="zoom:80%;" />
 </li>
 <li><p>链接请求中所附带的参数！<code>Query String Parameters</code>，中文翻译是：查询字符串参数。</p>
 </li>
@@ -231,7 +219,6 @@
 <li><p>来观察比较，依然在“七里香”的歌曲详情页，点击精彩评论的<strong>点击加载更多</strong>按钮，此时<code>Network</code>会多加载出更多的<code>XHR</code>，但是Name为<code>fcg_global_comment_h5…</code>才是关心的XHR。</p>
 </li>
 <li><p>点开它们的<code>Query String Parameters</code>，比较参数</p>
-<p><img src="D:\yeemjBlog\blog\source_posts\P21爬取歌曲的评论.assets\image-20210406135846528.png" alt="image-20210406135846528"></p>
 </li>
 <li><p>多点耐心就会发现，链接的众多参数中，只有一个参数在变化。这个参数是<code>pagenum</code>，第一次<strong>点击加载更多</strong>的值为<code>1</code>，第二第三次点击它的值就变成了<code>2</code>和<code>3</code>。</p>
 </li>
@@ -249,7 +236,6 @@
 <li><p>的确能够完成我们的目标。只是修改链接的参数实在太麻烦了，显然不够优雅，因为它实在太长。</p>
 </li>
 <li><p><code>requests</code>模块里的<code>requests.get()</code>提供了一个参数叫<code>params</code>，可以用字典的形式，把参数传进去。</p>
-<img src="D:\NoteBook\353Python小课\1日常学习\21爬取数据3\image-20210406140724288.png" alt="image-20210406140724288" style="zoom:80%;" />
 </li>
 <li><p>所以，可以把<code>Query String Parameters</code>里的内容，直接复制下来，封装为一个字典，传递给<code>params</code>。只是有一点要特别注意：要给他们打引号，让它们变字符串。</p>
 </li>
@@ -280,8 +266,6 @@
 </li>
 </ul>
 <h5 id="添加Request-Headers"><a href="#添加Request-Headers" class="headerlink" title="添加Request Headers"></a>添加Request Headers</h5><p>Requests模块允许我们去修改Headers的值</p>
-<img src="D:\NoteBook\353Python小课\1日常学习\21爬取数据3\image-20210406144117194.png" alt="image-20210406144117194" style="zoom:67%;" />
-
 <ul>
 <li>只需要封装一个字典就好了。和写params非常相像，修改<code>origin</code>或<code>referer</code>也和此类似，一并作为字典写入headers就好。</li>
 </ul>
@@ -566,15 +550,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">python基础</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">python小项目</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">python爬虫基础</a>
+                <a href="javascript:void(0)" class="js-tag color3">读书</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -582,11 +558,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">读书</a>
+                <a href="javascript:void(0)" class="js-tag color3">电影</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">电影</a>
+                <a href="javascript:void(0)" class="js-tag color4">python基础</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">python爬虫基础</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">python小项目</a>
               </li>
              
               <li class="article-tag-list-item">
